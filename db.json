@@ -1,0 +1,32 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "Nemuel Lim",
+      "username": "admin",
+      "password": "admin"
+    },
+    {
+      "id": 1,
+      "name": "User",
+      "username": "user",
+      "password": "user"
+    }
+  ],
+  "orders": [
+    {
+      "name": "Books Harry Potter",
+      "description": "books",
+      "price": 300,
+      "status": "Pending",
+      "id": 1
+    },
+    {
+      "name": "test",
+      "description": "test",
+      "price": 123,
+      "status": "Reject",
+      "id": 2
+    }
+  ]
+}

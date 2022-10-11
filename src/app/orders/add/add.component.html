@@ -1,0 +1,39 @@
+<div class="container-fluid pb-3">
+  <h4>{{ formName }} Order</h4>
+
+  <form [formGroup]="ordersForm" (ngSubmit)="save()">
+    <div class="row">
+      <div class="col">
+        <label for="name" class="form-label">Product</label>
+        <input type="text" class="form-control" formControlName="name" />
+      </div>
+      <div class="col">
+        <label for="name" class="form-label">Description</label>
+        <input type="text" class="form-control" formControlName="description" />
+      </div>
+      <div class="col">
+        <label for="name" class="form-label">Price</label>
+        <input type="number" class="form-control" formControlName="price" />
+      </div>
+      <div class="col" *ngIf="loginUser === 'admin'">
+        <label for="name" class="form-label">Status</label>
+        <select
+          type="text"
+          class="form-control"
+          id="selectedTime"
+          formControlName="status"
+        >
+          <option selected="selected" disabled="true">Select Status</option>
+          <option *ngFor="let stat of statusList" [value]="stat">
+            {{ stat }}
+          </option>
+        </select>
+      </div>
+    </div>
+    <div class="button-cont">
+      <button type="submit" class="btn btn-dark mt-3 text-right">
+        {{ formName }} New Order
+      </button>
+    </div>
+  </form>
+</div>
