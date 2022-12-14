@@ -1,21 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { ToastrService } from 'ngx-toastr';
-import { setApiStatus } from 'src/app/shared/store/app.action';
-import { selectAppState } from 'src/app/shared/store/app.selector';
-import { Appstate } from 'src/app/shared/store/appstate';
+import { setApiStatus } from 'src/app/shared/app-store/app.action';
+import { selectAppState } from 'src/app/shared/app-store/app.selector';
+import { Appstate } from 'src/app/shared/app-store/appstate';
 import { invokeDeleteOrderAPI, invokeOrdersAPI } from '../store/actions';
-import { Order } from '../store/order';
-import { selectOrders } from '../store/selector';
+import { Order } from '../interfaces/order';
+// import { selectOrders } from './store/selector';
+import { of } from 'rxjs';
 
 declare var window: any;
-
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss'],
+  selector: 'app-orders',
+  templateUrl: './orders.component.html',
+  styleUrls: ['./orders.component.scss'],
 })
-export class HomeComponent implements OnInit {
+export class OrdersComponent implements OnInit {
   createUpdateNewOrder: boolean = false;
   orderRowData: Order = {
     id: 0,
@@ -34,7 +34,15 @@ export class HomeComponent implements OnInit {
     private toastr: ToastrService
   ) {}
 
-  orders$ = this.store.pipe(select(selectOrders));
+  orders$ = of([
+    {
+      id: 0,
+      name: '',
+      description: '',
+      price: 0,
+      status: '',
+    },
+  ]); /* this.store.pipe(select(selectOrders)); */
   disableButton: boolean = false;
 
   ngOnInit(): void {
@@ -42,7 +50,7 @@ export class HomeComponent implements OnInit {
       document.getElementById('deleteModal')
     );
 
-    this.store.dispatch(invokeOrdersAPI());
+    // this.store.dispatch(invokeOrdersAPI());
   }
 
   openDeleteModal(id: number) {

@@ -1,17 +1,22 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AdminComponent } from './admin/admin.component';
+import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
-  { path: 'admin', component: AdminComponent },
+  { path: 'home', component: HomeComponent },
+  {
+    path: 'products',
+    loadChildren: () =>
+      import('./products/products.module').then((o) => o.ProductsModule),
+  },
   {
     path: 'orders',
     loadChildren: () =>
       import('./orders/orders.module').then((o) => o.OrdersModule),
   },
-  { path: '', component: LoginComponent },
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: '**', redirectTo: '', pathMatch: 'full' },
 ];
 

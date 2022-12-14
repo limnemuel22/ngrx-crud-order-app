@@ -1,0 +1,128 @@
+<div class="container mt-3 add-container" *ngIf="createUpdateNewOrder">
+  <div class="row add-button-row">
+    <div class="col">
+      <button
+        type="button"
+        class="btn btn-muted"
+        (click)="createUpdateNewOrder = false; formName = 'Add'"
+      >
+        x
+      </button>
+    </div>
+  </div>
+  <app-order-add></app-order-add>
+  <!--   <app-add
+    (actions)="closeAddEditForm($event)"
+    [orderId]="orderRowData.id"
+    [formName]="formName"
+  ></app-add> -->
+</div>
+
+<div class="container mt-5">
+  <h3>Orders</h3>
+  <div class="row add-button-row">
+    <div class="col">
+      <button type="button" class="btn btn-dark" (click)="addNewOrder()">
+        Add
+      </button>
+    </div>
+  </div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Product</th>
+        <th scope="col">Description</th>
+        <th scope="col">Price</th>
+        <th scope="col">Status</th>
+        <th scope="col" colspan="2">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let order of orders$ | async">
+        <th scope="row">{{ order.id }}</th>
+        <td>{{ order.name }}</td>
+        <td>{{ order.description }}</td>
+        <td>{{ order.price }}</td>
+        <td>{{ order.status }}</td>
+        <td>
+          <div class="button-container">
+            <button
+              type="button"
+              class="btn btn-info"
+              (click)="editOrder(order)"
+            >
+              Edit
+            </button>
+            <button
+              type="button"
+              class="btn btn-danger"
+              (click)="openDeleteModal(order.id)"
+            >
+              Delete
+            </button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="deleteModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Delete Confirmation</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+          (click)="deleteModal.hide()"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">Are you sure you want to delete this order?</div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-dismiss="modal"
+          (click)="deleteModal.hide()"
+        >
+          Close
+        </button>
+        <button
+          type="button"
+          class="btn btn-danger"
+          [disabled]="true"
+          *ngIf="disableButton"
+        >
+          <span
+            class="spinner-border spinner-border-sm"
+            role="status"
+            aria-hidden="true"
+          ></span>
+          Loading...
+        </button>
+        <button
+          type="button"
+          class="btn btn-danger"
+          (click)="confirmDelete()"
+          *ngIf="!disableButton"
+        >
+          Confirm Delete
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

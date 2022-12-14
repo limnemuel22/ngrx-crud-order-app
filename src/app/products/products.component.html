@@ -1,27 +1,27 @@
-<div class="container mt-3 add-container" *ngIf="createUpdateNewOrder">
+<div class="container mt-3 add-container" *ngIf="showCreateUpdateNewOrder">
   <div class="row add-button-row">
     <div class="col">
       <button
         type="button"
         class="btn btn-muted"
-        (click)="createUpdateNewOrder = false; formName = 'Add'"
+        (click)="showCreateUpdateNewOrder = false; formName = 'Add'"
       >
         x
       </button>
     </div>
   </div>
-  <app-add
+  <app-product-add
     (actions)="closeAddEditForm($event)"
-    [orderId]="orderRowData.id"
+    [productId]="productRowData.id"
     [formName]="formName"
-  ></app-add>
+  ></app-product-add>
 </div>
 
 <div class="container mt-5">
   <h3>Orders</h3>
   <div class="row add-button-row">
     <div class="col">
-      <button type="button" class="btn btn-dark" (click)="addNewOrder()">
+      <button type="button" class="btn btn-dark" (click)="addNewProduct()">
         Add
       </button>
     </div>
@@ -29,34 +29,34 @@
   <table class="table table-striped">
     <thead>
       <tr>
-        <th scope="col">#</th>
         <th scope="col">Product</th>
         <th scope="col">Description</th>
         <th scope="col">Price</th>
+        <th scope="col">Quantity</th>
         <th scope="col">Status</th>
         <th scope="col" colspan="2">Actions</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let order of orders$ | async">
-        <th scope="row">{{ order.id }}</th>
-        <td>{{ order.name }}</td>
-        <td>{{ order.description }}</td>
-        <td>{{ order.price }}</td>
-        <td>{{ order.status }}</td>
+      <tr *ngFor="let product of products$ | async">
+        <td>{{ product.productName }}</td>
+        <td>{{ product.description }}</td>
+        <td>{{ product.price }}</td>
+        <td>{{ product.quantity }}</td>
+        <td>{{ product.quantity > 0 ? "Available" : "Out of Stock" }}</td>
         <td>
           <div class="button-container">
             <button
               type="button"
               class="btn btn-info"
-              (click)="editOrder(order)"
+              (click)="editProduct(product)"
             >
               Edit
             </button>
             <button
               type="button"
               class="btn btn-danger"
-              (click)="openDeleteModal(order.id)"
+              (click)="openDeleteModal(product)"
             >
               Delete
             </button>
@@ -90,7 +90,10 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">Are you sure you want to delete this order?</div>
+      <div class="modal-body">
+        Are you sure you want to delete this product
+        {{ deleteProductData.productName }}?
+      </div>
       <div class="modal-footer">
         <button
           type="button"

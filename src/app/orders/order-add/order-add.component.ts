@@ -10,19 +10,19 @@ import {
 import { FormControl, FormGroup } from '@angular/forms';
 import { select, Store } from '@ngrx/store';
 import { ToastrService } from 'ngx-toastr';
-import { setApiStatus } from 'src/app/shared/store/app.action';
-import { selectAppState } from 'src/app/shared/store/app.selector';
-import { Appstate } from 'src/app/shared/store/appstate';
-import { invokeSaveOrderAPI, invokeUpdateOrderAPI } from '../store/actions';
-import { Order } from '../store/order';
-import { selectOrderById } from '../store/selector';
+import { setApiStatus } from 'src/app/shared/app-store/app.action';
+import { selectAppState } from 'src/app/shared/app-store/app.selector';
+import { Appstate } from 'src/app/shared/app-store/appstate';
+import { invokeSaveOrderAPI, invokeUpdateOrderAPI } from '../../store/actions';
+import { Order } from '../../interfaces/order';
+import { selectOrderById } from '../../store/selector';
 
 @Component({
-  selector: 'app-add',
-  templateUrl: './add.component.html',
-  styleUrls: ['./add.component.scss'],
+  selector: 'app-order-add',
+  templateUrl: './order-add.component.html',
+  styleUrls: ['./order-add.component.scss'],
 })
-export class AddComponent implements OnInit {
+export class AddOrderComponent implements OnInit {
   ordersForm: FormGroup = new FormGroup({
     name: new FormControl(''),
     description: new FormControl(''),

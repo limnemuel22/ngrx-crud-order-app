@@ -1,0 +1,14 @@
+.add-container {
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+.add-button-row {
+  text-align-last: end;
+}
+
+.button-container {
+  display: grid;
+  grid-template-columns: 0.1fr 0.1fr;
+  grid-gap: 5px;
+}

@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "store-exam": {
+      "hosting": {
+        "exam-ordering-app": [
+          "store-exam"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "store-exam"
+  }
+}

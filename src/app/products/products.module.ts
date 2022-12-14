@@ -2,37 +2,38 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { StoreModule } from '@ngrx/store';
-import { ordersReducer } from '../store/reducer';
 import { EffectsModule } from '@ngrx/effects';
-import { StoreEffects } from '../store/effects';
-import { AddOrderComponent } from './order-add/order-add.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToastrModule } from 'ngx-toastr';
-import { OrdersComponent } from './orders.component';
 import { RouterModule, Routes } from '@angular/router';
+import { ProductsComponent } from './products.component';
+import { productsReducer } from '../store/reducer';
+import { StoreEffects } from '../store/effects';
+import { ProductAddComponent } from './product-add/product-add.component';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'order-list',
+    redirectTo: 'product-list',
     pathMatch: 'full',
   },
   {
-    path: 'order-list',
-    component: OrdersComponent,
+    path: 'product-list',
+    component: ProductsComponent,
   },
 ];
 @NgModule({
-  declarations: [OrdersComponent, AddOrderComponent],
+  declarations: [ProductsComponent, ProductAddComponent],
   imports: [
     CommonModule,
     FormsModule,
+
     ReactiveFormsModule,
     RouterModule.forChild(routes),
-    StoreModule.forFeature('myorders', ordersReducer),
     EffectsModule.forFeature([StoreEffects]),
+    StoreModule.forFeature('products', productsReducer),
     ToastrModule.forRoot(),
   ],
-  exports: [RouterModule],
+  exports: [RouterModule, ProductsComponent],
 })
-export class OrdersModule {}
+export class ProductsModule {}

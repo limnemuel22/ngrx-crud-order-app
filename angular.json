@@ -23,13 +23,18 @@
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
-            "assets": ["src/favicon.ico", "src/assets"],
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ],
             "styles": [
               "src/styles.scss",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "node_modules/ngx-toastr/toastr.css"
             ],
-            "scripts": ["node_modules/bootstrap/dist/js/bootstrap.min.js"]
+            "scripts": [
+              "node_modules/bootstrap/dist/js/bootstrap.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -90,9 +95,24 @@
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
             "inlineStyleLanguage": "scss",
-            "assets": ["src/favicon.ico", "src/assets"],
-            "styles": ["src/styles.scss"],
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ],
+            "styles": [
+              "src/styles.scss"
+            ],
             "scripts": []
+          }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "prerender": false,
+            "ssr": false,
+            "browserTarget": "exam-ordering-app:build:production",
+            "firebaseProject": "store-exam",
+            "firebaseHostingSite": "store-exam"
           }
         }
       }
